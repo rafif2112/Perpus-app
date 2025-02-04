@@ -129,7 +129,12 @@
             <h2>We are sorry, Page not found!</h2>
             <p>The page you are looking for might have been removed had its name changed or is temporarily unavailable.
             </p>
-            <a href="{{ url('/') }}">Back To Homepage</a>
+            {{-- <a href="{{ url('/') }}">Back To Homepage</a> --}}
+            @if(Auth::check() && Auth::user()->role == 'admin')
+                <a href="{{ route('dashboard') }}">Back To Homepage</a>
+            @else
+                <a href="{{ route('home') }}">Back To Homepage</a>
+            @endif
         </div>
     </div>
 

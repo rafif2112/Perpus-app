@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Book;
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Models\Save;
 
 class BookController extends Controller
 {
@@ -14,18 +15,30 @@ class BookController extends Controller
         return view('admin.view.dashboard', compact('totalBooks', 'totalUsers'));
     }
 
-    public function index() {
-        $books = Book::all();
-        return view('user.view.daftar-buku', compact('books'));
+    public function index(Request $request) {
+        $books = Book::with('loans')->when($request->cari_buku, function ($query, $cari_buku) {
+            return $query->where('judul', 'like', "%{$cari_buku}%");
+        })->simplePaginate(15)->appends(request()->query());
+
+        $saves = Save::where('user_id', auth()->user()->id)->get();
+        
+        return view('user.view.daftar-buku', compact('books', 'saves'));
     }
 
     public function adminIndex() {
-        $books = Book::paginate(10);
+        $books = Book::simplePaginate(10);
         return view('admin.view.daftar-buku.index', compact('books'));
     }
 
     public function create() {
         return view('admin.view.daftar-buku.create');
+    }
+
+    public function updateStatus($id) {
+        $book = Book::find($id);
+        $book->status = "saved";
+        $book->save();
+        return redirect()->back()->with('success', 'Status buku berhasil diubah');
     }
 
     public function show($id) {

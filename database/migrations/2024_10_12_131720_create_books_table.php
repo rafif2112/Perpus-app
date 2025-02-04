@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('kategori');
             $table->string('gambar');
             $table->text('deskripsi');
+            $table->enum('is_saved', ['saved', 'unsaved'])->default('unsaved');
             $table->timestamps();
         });
     }

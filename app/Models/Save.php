@@ -1,19 +1,14 @@
 <?php
+
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Loan extends Model
+class Save extends Model
 {
-    use HasFactory;
-
     protected $fillable = [
         'user_id',
         'book_id',
-        'tanggal_pinjam',
-        'tanggal_jatuh_tempo',
-        'status_pengembalian',
     ];
 
     // Relasi dengan model User

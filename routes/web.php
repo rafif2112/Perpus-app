@@ -9,6 +9,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\LoanController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\SaveController;
 
 Route::middleware('guest')->group(function () {
     Route::get('/login', [AuthenticatedSessionController::class, 'login'])->name('login'); 
@@ -41,10 +42,12 @@ Route::middleware('auth', 'verified')->group(function () {
                 Route::delete('/{id}', [UserController::class, 'destroy'])->name('destroy');
             });
 
-            Route::prefix('/peminjam')->name('peminjaman.')->group(function () {
-                Route::get('/', [LoanController::class, 'riwayat'])->name('index');
-                Route::get('/laporan', [LoanController::class, 'laporan'])->name('laporan');
+            Route::prefix('/peminjaman')->name('peminjaman.')->group(function () {
+                Route::get('/riwayat', [LoanController::class, 'riwayat'])->name('index');
+                Route::get('/print-pdf/{id}', [LoanController::class, 'printPdf'])->name('print');
+                Route::get('/export-excel', [LoanController::class, 'exportExcel'])->name('export');
             });
+
         });
     });
     
@@ -55,8 +58,12 @@ Route::middleware('auth', 'verified')->group(function () {
         Route::get('/detail-buku/{id}', [BookController::class, 'show'])->name('detail-buku');
         Route::get('/pinjam/{book_id}', [LoanController::class, 'pinjam'])->name('pinjam');
         Route::get('/kembalikan/{loan_id}', [LoanController::class, 'kembalikan'])->name('kembalikan');
+        Route::get('/bayar-denda/{loan_id}', [LoanController::class, 'bayarDenda'])->name('bayar-denda');
         Route::get('/riwayat', [LoanController::class, 'riwayat'])->name('riwayat');
         Route::delete('/hapus-histori', [LoanController::class, 'deleteHistoryPengembalian'])->name('hapus-histori-pengembalian');
+        Route::get('/disimpan', [SaveController::class, 'index'])->name('saved');
+        Route::post('/simpan/{book_id}', [SaveController::class, 'store'])->name('save-book');
+        Route::delete('/hapus-simpanan/{save_id}', [SaveController::class, 'destroy'])->name('unsave-book');
     });
 
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');

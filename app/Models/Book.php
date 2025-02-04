@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -15,6 +14,12 @@ class Book extends Model
     public function loans()
     {
         return $this->hasMany(Loan::class);
+    }
+
+    // Relasi dengan model Save
+    public function saves()
+    {
+        return $this->hasMany(Save::class);
     }
 
     // Metode untuk memeriksa apakah buku sedang dipinjam

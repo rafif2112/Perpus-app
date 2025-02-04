@@ -8,6 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.js"></script>
     @vite('resources/css/app.css', 'resources/js/app.js')
+    
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 
@@ -17,6 +18,12 @@
 
     {{-- icon web --}}
     <link rel="icon" href="{{asset('assets/images/icon/logo.png')}}">
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.14.4/dist/sweetalert2.all.min.js">
+    </script><link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.14.4/dist/sweetalert2.min.css" rel="stylesheet">
+
+    {{-- animate css --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 
     <style>
         * {
@@ -53,9 +60,6 @@
 
     <script>
         const loadingScreen = document.getElementById('loading-screen');
-        // window.addEventListener('beforeunload', () => {
-        //     loadingScreen.style.display = 'flex';
-        // });
         window.addEventListener('load', () => {
             loadingScreen.style.display = 'none';
         });

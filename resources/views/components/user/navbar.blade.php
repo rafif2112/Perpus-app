@@ -3,7 +3,7 @@
         <a href="/" class="flex items-center space-x-3 rtl:space-x-reverse">
             <span class="self-center text-2xl font-semibold whitespace-nowrap">PerpusApp</span>
         </a>
-        <div class="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
+        <div class="flex gap-4 items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
             <button type="button" class="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
                 <span class="sr-only">Open user menu</span>
                 <img class="w-11 h-11 rounded-full" src="{{asset('assets/images/profile/image.jpg')}}" alt="user photo">
@@ -22,7 +22,11 @@
                         <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Pengaturan</a>
                     </li>
                     <li>
-                        <a href="{{route('logout')}}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Keluar</a>
+                        <a href="{{route('saved')}}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Disimpan</a>
+                    </li>
+                    <hr class="pb-2">
+                    <li>
+                        <a href="{{route('logout')}}" class="block px-4 py-2 text-sm text-red-700 hover:bg-gray-100">Keluar</a>
                     </li>
                 </ul>
             </div>
